@@ -3,4 +3,6 @@ bin/
 include/
 lib/
 lib64/
+ lib64/
+lig64 /
 pyvenv.cfg

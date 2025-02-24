@@ -4,7 +4,7 @@ LLM powered Agent
 
 Objective of the project
 
-The project is to learn building  basic level LLM powered Agents. 
+Question Answering agent powered by LLMs. This is a simple agent (going forward will share more advanced LLM powered agents) 
 
 Platform and technology used
 

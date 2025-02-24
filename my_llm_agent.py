@@ -2,6 +2,8 @@
 #
 #Additional work done by Jyotishko
 
+#Simple LLM and RAG based agent for QUestion answering
+
 import os
 import yaml
 
@@ -35,6 +37,8 @@ from langchain_community.document_loaders import WebBaseLoader
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 from langchain.tools.retriever import create_retriever_tool
+
+# Tool webpage information and stored it in FAISS vector store
 
 loader = WebBaseLoader("https://awards.3ai.in/acme-2024-winners/")
 docs = loader.load()
@@ -84,7 +88,7 @@ agent_with_chat_history = RunnableWithMessageHistory(
 
 agent_with_chat_history.invoke(
     {
-        "input": "Identify if Jyotishko Biswas won any award in 2024. Also let me know the count of popel who won the same award",
+        "input": "Identify if Dr. Santosh Karthikeyan Viswanatha won any award in 2024. Also let me know the count of popel who won the same award",
        
     }, 
     config={"configurable": {"session_id": "<foo>"}}

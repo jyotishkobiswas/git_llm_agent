@@ -2,7 +2,7 @@
 #
 #Additional work done by Jyotishko
 
-#Simple LLM and RAG based agent for QUestion answering
+#Simple LLM and RAG based agent for Question answering
 
 import os
 import yaml
@@ -18,6 +18,8 @@ from langchain_community.utilities.tavily_search import TavilySearchAPIWrapper
 #from langchain.tools.tavily_search import TavilySearchResults
 from langchain_community.tools.tavily_search.tool import TavilySearchResults
 from langchain.tools import tool
+
+# Tavily search has been used to fetch real time data from web page
 
 search = TavilySearchAPIWrapper()
 tavily_tool = TavilySearchResults(api_wrapper=search)
@@ -38,7 +40,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 from langchain.tools.retriever import create_retriever_tool
 
-# Tool webpage information and stored it in FAISS vector store
+# Webpage information extracted using Tavily API, chunked and then stored in FAISS vector store
 
 loader = WebBaseLoader("https://awards.3ai.in/acme-2024-winners/")
 docs = loader.load()
@@ -50,9 +52,11 @@ retriever = vector.as_retriever()
 
 retriever_tool = create_retriever_tool(
     retriever,
-    "Jyotishko_Biswas_search",
-    "Search for information about Jyotishko Biswas. For any questions about Jyotishko Biswas, you must use this tool!",
+    "Dr. Santosh Karthikeyan Viswanatha_search",
+    "Search for information about Dr. Santosh Karthikeyan Viswanatha. For any questions about Dr. Santosh Karthikeyan Viswanatha, you must use this tool!",
 )
+
+# Chat history is stored as it allows conversation with the Chatbot
 
 from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.runnables.history import RunnableWithMessageHistory
@@ -75,6 +79,8 @@ for t in tools:
 from langchain_openai import ChatOpenAI
 from langchain.agents import create_openai_functions_agent
 from langchain.agents import AgentExecutor
+
+# gpt 3.5 has been used as the LLM
 
 llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 agent = create_openai_functions_agent(llm, tools, prompt)
